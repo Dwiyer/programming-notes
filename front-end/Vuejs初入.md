@@ -199,11 +199,11 @@ Vue 提供了一种更通用的方式来观察和响应 Vue 实例上的数据�
 
 ------
 
-组件是可复用的 Vue 实例，且带有一个名字。因为组件是可复用的 Vue 实例，所以它们与 `new Vue` 接收相同的选项，例如 `data`、`computed`、`watch`、`methods` 以及生命周期钩子等。仅有的例外是像 `el` 这样根实例特有的选项。
+组件是可复用的 Vue 实例，且带有一个名字。**因为组件是可复用的 Vue 实例，所以它们与 `new Vue` 接收相同的选项，例如 `data`、`computed`、`watch`、`methods` 以及生命周期钩子等。仅有的例外是像 `el` 这样根实例特有的选项。**
 
 ##### 组件的复用
 
-**一个组件的 `data` 选项必须是一个函数**，因此每个实例可以维护一份被返回对象的独立的拷贝（每次函数调用，都会创建函数调用栈）。因为每用一次组件，就会有一个它的新**实例**被创建。
+**一个组件的 `data` 选项必须是一个函数**，因此每个实例可以维护一份被返回对象的独立的拷贝（每次函数调用，都会创建函数调用栈存储本地变量等信息）。因为每用一次组件，就会有一个它的新**实例**被创建。
 
 ##### 组件的组织
 
@@ -239,7 +239,64 @@ Prop 是你可以在组件上注册的一些自定义 attribute。我们可以�
 
 
 
+###### 解析DOM模板时的注意事项
 
+有些 HTML 元素，诸如<ul>、<ol>、<table> 和 <select>，对于哪些元素可以出现在其内部是有严格限制的。而有些元素，诸如 <li>、<tr> 和 <option>，只能出现在其它某些特定的元素内部。
+
+这会导致我们使用这些有约束条件的元素时遇到一些问题。例如：
+
+```vue
+<table>
+  <blog-post-row></blog-post-row>
+</table>
+```
+
+这个自定义组件 <blog-post-row> 会被作为无效的内容提升到外部，并导致最终渲染结果出错。幸好这个特殊的 is attribute 给了我们一个变通的办法：
+
+```vue
+<table>
+  <tr is="blog-post-row"></tr>
+</table>
+```
+
+需要注意的是**如果我们从以下来源使用模板的话，这条限制是\*不存在\*的**：
+
+- 字符串 (例如：`template: '...'`)
+
+- [单文件组件 (`.vue`)](https://cn.vuejs.org/v2/guide/single-file-components.html)
+
+- <script type="text/x-template">
+
+
+
+##### 组件事件
+
+组件自定义事件
+
+监听子组件事件
+
+
+
+##### 插槽
+
+<slot></slot>
+
+
+
+##### 动态组件
+
+有的时候，在不同组件之间进行动态切换是非常有用的，比如在一个多标签的界面里，可以通过 Vue 的 `` 元素加一个特殊的 `is` attribute 来实现：
+
+```vue
+<!-- 组件会在 `currentTabComponent` 改变时改变 --> <component v-bind:is="currentTabComponent"></component>
+```
+
+在上述示例中，`currentTabComponent` 可以包括
+
+- 已注册组件的名字，或
+- 一个组件的选项对象
+
+请留意，这个 attribute 可以用于常规 HTML 元素，但这些元素将被视为组件，这意味着所有的 attribute **都会作为 DOM attribute 被绑定**。对于像 `value` 这样的 property，若想让其如预期般工作，你需要使用 [`.prop` 修饰器](https://cn.vuejs.org/v2/api/#v-bind)。
 
 
 

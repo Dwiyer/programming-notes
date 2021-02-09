@@ -62,7 +62,27 @@ This section discusses `@ModelAttribute` methods — the second item in the 
 
 **@InitBinder**
 
+`@Controller` or `@ControllerAdvice` classes can have `@InitBinder` methods that initialize instances of `WebDataBinder`, and those, in turn, can:
 
+- Bind request parameters (that is, form or query data) to a model object.
+- Convert String-based request values (such as request parameters, path variables, headers, cookies, and others) to the target type of controller method arguments.
+- Format model object values as `String` values when rendering HTML forms.
+
+`@InitBinder` methods can register controller-specific `java.beans.PropertyEditor` or Spring `Converter` and `Formatter`components. In addition, you can use the [MVC config](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-config-conversion) to register `Converter` and `Formatter` types in a globally shared `FormattingConversionService`.
+
+`@InitBinder` methods support many of the same arguments that `@RequestMapping` methods do, except for `@ModelAttribute`(command object) arguments. Typically, they are declared with a `WebDataBinder` argument (for registrations) and a `void` return value. 
+
+
+
+@**ExceptionHandler**
+
+`@Controller` and [@ControllerAdvice](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-ann-controller-advice) classes can have `@ExceptionHandler` methods to handle exceptions from controller methods.
+
+The exception may match against a top-level exception being propagated (e.g. a direct `IOException` being thrown) or against a nested cause within a wrapper exception (e.g. an `IOException` wrapped inside an `IllegalStateException`). As of 5.3, this can match at arbitrary cause levels, whereas previously only an immediate cause was considered.
+
+For matching exception types, preferably declare the target exception as a method argument, as the preceding example shows. When multiple exception methods match, a root exception match is generally preferred to a cause exception match. More specifically, the `ExceptionDepthComparator` is used to sort exceptions based on their depth from the thrown exception type.
+
+Alternatively, the annotation declaration may narrow the exception types to match, You can even use a list of specific exception types with a very generic argument signature.
 
 
 

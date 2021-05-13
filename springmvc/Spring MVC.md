@@ -13,41 +13,6 @@ ServletConfig对象在初始化Servlet 时由Web服务器提供给Servlet。
 
 ###  处理请求
 
-#### HttpServletBean
-
-
-
-#### FrameworkServlet
-
-LocaleContext  LocaleContextHolder <!--获取Locale-->
-
-ServletRequestAttributes->RequestAttributes  RequestContextHoler <!--管理request和session属性-->
-
-WebAsyncManager  WebAsyncUtils
-
-*service()*
-
-  *processRequest()*  <!--是FrameworkServlet类在处理请求中最核心的方法。对LocaleContext和RequestAttributes的设置及恢复-->
-
-​    *initContextHolders()*    <!--设置LocaleContext和RequestAttributes-->
-
-​    *doService()*  <!--模板方法，实际处理请求入口-->
-
-​    *resetContextHolders()* <!--恢复LocaleContext和RequestAttributes-->
-
-​    *publishRequestHandledEvent()* <!--发布ServletRequestHandledEvent类型的消息-->
-
-
-
-#### DispatcherServlet
-
-DispatcherServlet其实就是个Servlet（它继承自HttpServlet基类），同样也需要在你web应用的web.xml配置文件下声明。你需要在web.xml文件中把你希望DispatcherServlet处理的请求映射到对应的URL上去。这就是标准的Java EE Servlet配置；
-
-a.DispatcherServlet如何与IoC容器、Servlet容器集成？
-1>使用spring mvc 启动了两个context：***Root WebApplicationContext*** 和 ***Servlet WebapplicationContext***。
-2>***ContextLoaderListener*** 创建基于web的应用根 applicationContext 并将它放入到ServletContext. applicationContext加载或者卸载spring管理的beans。在structs和spring mvc的控制层都是这样使用的。称之为Root WebapplicationContext。
-3>DispatcherServlet创建自己的WebApplicationContext并管理这个WebApplicationContext里面的 handlers/controllers/view-resolvers。称之为Servlet WebapplicationContext。
-
 
 
 #### Context Hierarchy

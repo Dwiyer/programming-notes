@@ -30,6 +30,10 @@ You can use the [Message Converters](https://docs.spring.io/spring-framework/doc
 
 You can use `@RequestBody` in combination with `javax.validation.Valid` or Spring’s `@Validated` annotation, both of which cause Standard Bean Validation to be applied. By default, validation errors cause a `MethodArgumentNotValidException`, which is turned into a 400 (BAD_REQUEST) response. Alternatively, you can handle validation errors locally within the controller through an `Errors` or `BindingResult` argument.
 
+@**RequestParam**
+
+该注解有三个主要的作用：给变量取别名；设置变量是否必填；给变量设置默认值；
+
 **@ResponseBody**
 
 Writes directly to the response body versus view resolution and rendering with an HTML template.
@@ -122,7 +126,11 @@ Spring MVC supports using a single value [reactive type](https://docs.spring.io/
 
 
 
+#### 参数映射
 
+------
+
+HTTP 请求中，Query String Parameters 参数可以直接映射到控制器方法中的基本类型参数，POJO对象类型参数
 
 
 

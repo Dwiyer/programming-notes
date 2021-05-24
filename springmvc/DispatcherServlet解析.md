@@ -1,6 +1,8 @@
+Q1：DispatcherServlet的启动入口在哪？
 
 
 
+Q2：DispatcherServlet是如何与Spring Context联系起来的？
 
 
 
@@ -12,6 +14,10 @@ a.DispatcherServlet如何与IoC容器、Servlet容器集成？
 1>使用spring mvc 启动了两个context：***Root WebApplicationContext*** 和 ***Servlet WebapplicationContext***。
 2>***ContextLoaderListener*** 创建基于web的应用根 applicationContext 并将它放入到ServletContext. applicationContext加载或者卸载spring管理的beans。在structs和spring mvc的控制层都是这样使用的。称之为Root WebapplicationContext。
 3>DispatcherServlet创建自己的WebApplicationContext并管理这个WebApplicationContext里面的 handlers/controllers/view-resolvers。称之为Servlet WebapplicationContext。
+
+
+
+在context成功的refresh过后，DispatcherServlet的`onRefresh` 方法就会被调用，然后它会调用`initStrategies` 方法。
 
 
 
@@ -110,3 +116,14 @@ Servlet提供服务具体分4步：
 8. 应用已注册interceptor的postHandle方法。
 
 9. 处理异常或者视图渲染。
+
+
+
+
+
+##### 静态资源处理
+
+
+
+
+

@@ -28,7 +28,14 @@ Note: Implementations can implement the Ordered interface to be able to specify 
 
 
 
+SimpleUrlHandlerMapping
+
+可设置url与controller的映射关系（mappings）
+
+BeanNameUrlHandlerMapping
 
 
 
+DefaultAnnotationHandlerMapping 
 
+注解映射器:org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping 

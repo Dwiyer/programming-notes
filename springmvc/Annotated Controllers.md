@@ -34,6 +34,10 @@ You can use `@RequestBody` in combination with `javax.validation.Valid` or Sprin
 
 该注解有三个主要的作用：给变量取别名；设置变量是否必填；给变量设置默认值；
 
+@**PathVariable**
+
+
+
 **@ResponseBody**
 
 Writes directly to the response body versus view resolution and rendering with an HTML template.
@@ -134,7 +138,31 @@ HTTP 请求中，Query String Parameters 参数可以直接映射到控制器方
 
 
 
+##### 简单类型绑定
 
+简单类型的绑定中，方法形参中的参数名要和前台传进来的名一样才能完成参数的绑定。那有人要问了，如果有特殊需求（比如更好的可读性？），这里定义的参数名就是不一样，可以使用注解@RequestParam对简单的类型进行参数绑定
+
+
+
+##### 对象类型绑定
+
+对于基本类型，前台页面传进来的name要和要封装的pojo对象属性名一致，然后就可以将该pojo作为形参放到controller的方法中
+
+对于日期等特殊类型，需要定义转换器Converter
+
+
+
+##### 嵌套对象类型绑定
+
+使用点字符路径形式作为参数键值传入绑定
+
+
+
+##### 集合类型绑定
+
+
+
+##### Map类型绑定
 
 
 

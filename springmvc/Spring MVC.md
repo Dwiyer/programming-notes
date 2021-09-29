@@ -23,6 +23,10 @@ For many applications, having a single `WebApplicationContext` is simple and suf
 
 ![mvc context hierarchy](https://docs.spring.io/spring-framework/docs/current/reference/html/images/mvc-context-hierarchy.png)
 
+WebApplicationContext
+
+XmlWebApplicationContext
+
 
 
 

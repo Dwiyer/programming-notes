@@ -1,1 +1,2 @@
-# spring-tutorials
+# Programming notes
+including base computer technology knowledge
